@@ -5,9 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float speed = 8f;
+    [SerializeField] Joystick joystick;
 
     Rigidbody rb;
-    float yMovement;
+    float zMovement;
     float xMovement;
 
     private void Awake()
@@ -17,12 +18,37 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        xMovement= Input.GetAxisRaw("Horizontal");
-        yMovement = Input.GetAxisRaw("Vertical");
+        if(joystick.Horizontal>=.2f)
+        {
+            xMovement = speed;
+        }
+        else if(joystick.Horizontal<=-.2f)
+        {
+            xMovement = -speed;
+        }
+        else
+        {
+            xMovement = 0f;
+        }
+
+        if (joystick.Vertical >= .2f)
+        {
+            zMovement = speed;
+        }
+        else if (joystick.Vertical <= -.2f)
+        {
+            zMovement = -speed;
+        }
+        else
+        {
+            zMovement = 0f;
+        }
+        //xMovement = Input.GetAxisRaw("Horizontal");
+        //zMovement = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector3(xMovement * speed, 0f, yMovement * speed);
+        rb.velocity = new Vector3(xMovement, 0f, zMovement);
     }
 }
