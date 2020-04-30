@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float speed = 8f;
     [SerializeField] Joystick joystick;
+    [SerializeField] float joystickMinOffset = 0.2f;
 
     Rigidbody rb;
     float zMovement;
@@ -18,11 +19,18 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(joystick.Horizontal>=.2f)
+        XAxisMovement();
+
+        ZAxisMovement();
+    }
+
+    private void XAxisMovement()
+    {
+        if (joystick.Horizontal >= joystickMinOffset)
         {
             xMovement = speed;
         }
-        else if(joystick.Horizontal<=-.2f)
+        else if (joystick.Horizontal <= -joystickMinOffset)
         {
             xMovement = -speed;
         }
@@ -30,12 +38,15 @@ public class Player : MonoBehaviour
         {
             xMovement = 0f;
         }
+    }
 
-        if (joystick.Vertical >= .2f)
+    private void ZAxisMovement()
+    {
+        if (joystick.Vertical >= joystickMinOffset)
         {
             zMovement = speed;
         }
-        else if (joystick.Vertical <= -.2f)
+        else if (joystick.Vertical <= -joystickMinOffset)
         {
             zMovement = -speed;
         }
@@ -43,8 +54,6 @@ public class Player : MonoBehaviour
         {
             zMovement = 0f;
         }
-        //xMovement = Input.GetAxisRaw("Horizontal");
-        //zMovement = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()

@@ -14,17 +14,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] MovementType movementType;
     [SerializeField] float speed=5f;
 
-    Rigidbody rb;
-    Transform myTransform;
+    private Rigidbody rb;
+    private Transform myTransform;
+    private Vector3 target;
 
-    float gameAreaLength;
-    float gameAreaHeight;
-    float localScale;
-    float minPosX;
-    float maxPosX;
-    float minPosZ;
-    float maxPosZ;
-    Vector3 target;
+    private float gameAreaLength;
+    private float gameAreaHeight;
+    private float localScale;
+    private float posX;
+    private float posZ;
 
     public Transform GameArea { get; set; }
     private void Awake()
@@ -32,23 +30,25 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         myTransform = GetComponent<Transform>();
 
+        StartInitialization();
+    }
+
+    private void StartInitialization()
+    {
         localScale = transform.localScale.x;
         gameAreaLength = GameArea.GetComponent<MeshRenderer>().bounds.size.x * 0.5f;
         gameAreaHeight = GameArea.GetComponent<MeshRenderer>().bounds.size.z * 0.5f;
-        maxPosX = gameAreaLength - localScale;
-        minPosX = -maxPosX;
-        maxPosZ = gameAreaHeight - localScale;
-        minPosZ = -maxPosZ;
+        posX = gameAreaLength - localScale;
+        posZ = gameAreaHeight - localScale;
 
         if (movementType == MovementType.Horizontal)
         {
-            target = new Vector3(maxPosX, myTransform.position.y, myTransform.position.z);
+            target = new Vector3(posX, myTransform.position.y, myTransform.position.z);
         }
         else
         {
-            target = new Vector3(myTransform.position.x, myTransform.position.y, maxPosZ);
+            target = new Vector3(myTransform.position.x, myTransform.position.y, posZ);
         }
-        Debug.Log(target);
     }
 
     private void Update()
@@ -62,13 +62,12 @@ public class Enemy : MonoBehaviour
         {
             if (movementType == MovementType.Horizontal)
             {
-                target.x = target.x == maxPosX ? minPosX : maxPosX;
+                target.x = target.x == posX ? -posX : posX;
             }
             else
             {
-                target.z = target.z == maxPosZ ? minPosZ : maxPosZ;
+                target.z = target.z == posZ ? -posZ : posZ;
             }
-            Debug.Log(target);
         }
     }
 

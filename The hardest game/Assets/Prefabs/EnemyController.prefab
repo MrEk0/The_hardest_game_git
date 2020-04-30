@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12bf8ad837f89c4f8097da694222f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameArea: {fileID: 0}
   losePanel: {fileID: 0}
 --- !u!1001 &1086151161923610241
 PrefabInstance:
@@ -81,6 +82,11 @@ PrefabInstance:
       propertyPath: enemyController
       value: 
       objectReference: {fileID: 2813989010435968191}
+    - target: {fileID: 2891175319897162723, guid: 07502950f79eac34f8ccab9856e187d4,
+        type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2891175319897162734, guid: 07502950f79eac34f8ccab9856e187d4,
         type: 3}
       propertyPath: m_Constraints
@@ -181,6 +187,11 @@ PrefabInstance:
       propertyPath: enemyController
       value: 
       objectReference: {fileID: 2813989010435968191}
+    - target: {fileID: 2891175319897162723, guid: 07502950f79eac34f8ccab9856e187d4,
+        type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2891175319897162734, guid: 07502950f79eac34f8ccab9856e187d4,
         type: 3}
       propertyPath: m_Constraints
@@ -281,6 +292,11 @@ PrefabInstance:
       propertyPath: enemyController
       value: 
       objectReference: {fileID: 2813989010435968191}
+    - target: {fileID: 2891175319897162723, guid: 07502950f79eac34f8ccab9856e187d4,
+        type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2891175319897162734, guid: 07502950f79eac34f8ccab9856e187d4,
         type: 3}
       propertyPath: m_Constraints
@@ -381,6 +397,11 @@ PrefabInstance:
       propertyPath: enemyController
       value: 
       objectReference: {fileID: 2813989010435968191}
+    - target: {fileID: 2891175319897162723, guid: 07502950f79eac34f8ccab9856e187d4,
+        type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2891175319897162734, guid: 07502950f79eac34f8ccab9856e187d4,
         type: 3}
       propertyPath: m_Constraints
@@ -476,6 +497,11 @@ PrefabInstance:
       propertyPath: enemyController
       value: 
       objectReference: {fileID: 2813989010435968191}
+    - target: {fileID: 2891175319897162723, guid: 07502950f79eac34f8ccab9856e187d4,
+        type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2891175319897162734, guid: 07502950f79eac34f8ccab9856e187d4,
         type: 3}
       propertyPath: m_Constraints
