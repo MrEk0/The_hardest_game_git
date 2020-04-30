@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] Transform gameArea;
+    [SerializeField] EnemyController enemyController;
     [SerializeField] float speed=5f;
 
     Rigidbody rb;
@@ -15,13 +15,15 @@ public class Enemy : MonoBehaviour
     float minPos;
     float maxPos;
     Vector3 target;
+
+    public Transform GameArea { get; set; }
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         myTransform = GetComponent<Transform>();
 
-        localScale = transform.localScale.x*0.5f;
-        gameAreaLength = gameArea.GetComponent<MeshRenderer>().bounds.size.x * 0.5f;
+        localScale = transform.localScale.x;
+        gameAreaLength = GameArea.GetComponent<MeshRenderer>().bounds.size.x * 0.5f;
         maxPos = gameAreaLength - localScale;
         minPos = -maxPos;
 
@@ -30,6 +32,9 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (enemyController.isGameOver)
+            return;
+
         float distance = Vector2.SqrMagnitude(target - myTransform.position);
 
         if (Mathf.Approximately(0, distance))
@@ -40,7 +45,18 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (enemyController.isGameOver)
+            return;
+
         Vector3 newPos = Vector3.MoveTowards(myTransform.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.GetComponent<Player>())
+        {
+            enemyController.ShowLosePanel();
+        }
     }
 }
