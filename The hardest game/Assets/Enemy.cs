@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform gameArea;
     [SerializeField] float speed=5f;
 
-    Rigidbody2D rb;
+    Rigidbody rb;
     Transform myTransform;
 
     float gameAreaLength;
@@ -17,11 +17,11 @@ public class Enemy : MonoBehaviour
     Vector3 target;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
         myTransform = GetComponent<Transform>();
 
         localScale = transform.localScale.x*0.5f;
-        gameAreaLength = gameArea.localScale.x * 0.5f;
+        gameAreaLength = gameArea.GetComponent<MeshRenderer>().bounds.size.x * 0.5f;
         maxPos = gameAreaLength - localScale;
         minPos = -maxPos;
 
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 newPos = Vector2.MoveTowards(myTransform.position, target, speed * Time.fixedDeltaTime);
+        Vector3 newPos = Vector3.MoveTowards(myTransform.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
     }
 }
